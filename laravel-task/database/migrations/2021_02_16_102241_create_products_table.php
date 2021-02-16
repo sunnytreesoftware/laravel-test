@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price');
             $table->integer('stock');
             $table->year('year');
+            $table->string('image_path')->nullable();
             $table->timestamps();
         });
     }

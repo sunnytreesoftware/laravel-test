@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('employee', [EmployeeController::class, 'employee'])->name('employee');
 Route::post('employee', [EmployeeController::class, 'addEmployee'])->name('add.employee');
+
+Route::get('product', [ProductsController::class, 'product'])->name('product');
+Route::post('product', [ProductsController::class, 'addProduct'])->name('add.product');

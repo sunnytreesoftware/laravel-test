@@ -136,7 +136,7 @@
                       <a href="{{ Route('home') }}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
                       <a href="{{ Route('employee') }}" class="list-group-item list-group-item-action bg-light">Employees</a>
                       <a href="#" class="list-group-item list-group-item-action bg-light">Customers</a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">Products</a>
+                      <a href="{{ Route('product') }}" class="list-group-item list-group-item-action bg-light">Products</a>
                       <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
                       <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
                     </div>
