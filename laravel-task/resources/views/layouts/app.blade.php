@@ -18,6 +18,59 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        /*!
+ * Start Bootstrap - Simple Sidebar (https://startbootstrap.com/template/simple-sidebar)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-simple-sidebar/blob/master/LICENSE)
+ */
+
+ #wrapper {
+    overflow-x: hidden;
+ }
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+    </style>
 </head>
 <body>
     <div id="app">
@@ -51,7 +104,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->first_name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -73,7 +126,33 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="d-flex" id="wrapper">
+
+                <!-- Sidebar -->
+                @auth
+                  <div class="bg-light border-right" id="sidebar-wrapper">
+                    <div class="sidebar-heading">{{ config('app.name') }} </div>
+                    <div class="list-group list-group-flush">
+                      <a href="{{ Route('home') }}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+                      <a href="{{ Route('employee') }}" class="list-group-item list-group-item-action bg-light">Employees</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Customers</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Products</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
+                      <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
+                    </div>
+                  </div>
+                @endauth
+                <!-- /#sidebar-wrapper -->
+
+                <!-- Page Content -->
+                <div id="page-content-wrapper">
+                    <div class="container-fluid">
+                        @include('partial.alert')
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
+
         </main>
     </div>
 </body>

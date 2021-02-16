@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return (new App\Notifications\WelcomeNotification("assas", "email", "sasas"))
+                ->toMail('aaa');
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('employee', [EmployeeController::class, 'employee'])->name('employee');
+Route::post('employee', [EmployeeController::class, 'addEmployee'])->name('add.employee');
