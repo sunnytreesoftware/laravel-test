@@ -18,7 +18,7 @@ class CustomerController extends Controller
 
     public function customer(){
 
-        $customers = User::where('user_type', 2)->paginate(10);
+        $customers = User::where('user_type', User::CUSTOMER)->paginate(10);
         return view('customer', ['customers' => $customers]);
     }
 
@@ -46,7 +46,7 @@ class CustomerController extends Controller
                 'email' => $email,
                 'phone_number' => $phone_number,
                 'password' => Hash::make($password),
-                'user_type' => 2,
+                'user_type' => User::CUSTOMER,
             ]);
 
             $employee->assignRole(['customer']);

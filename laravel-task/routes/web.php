@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\SalesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,3 +36,7 @@ Route::post('topup-stock', [ProductsController::class, 'topUpProductStock'])->na
 
 Route::get('customer', [CustomerController::class, 'customer'])->name('customer');
 Route::post('customer', [CustomerController::class, 'addCustomer'])->name('add.customer');
+
+Route::get('order', [SalesController::class, 'order'])->name('order');
+Route::post('order', [SalesController::class, 'makeOrder'])->name('make.order');
+Route::get('make-paid/{order_id}', [SalesController::class, 'makePaid'])->name('make.paid'); 

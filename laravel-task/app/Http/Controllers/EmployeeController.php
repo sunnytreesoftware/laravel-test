@@ -22,7 +22,7 @@ class EmployeeController extends Controller
     public function employee(){
 
         $roles = Role::all();
-        $employee = User::with('roles')->where('user_type', 1)->where('id','!=',Auth::user()->id)->paginate(10);
+        $employee = User::with('roles')->where('user_type', User::EMPLOYEE)->where('id','!=',Auth::user()->id)->paginate(10);
 
         // return $employee;
         return view('employee', ['roles' => $roles, 'employee' => $employee]);
@@ -55,7 +55,7 @@ class EmployeeController extends Controller
                 'email' => $email,
                 'phone_number' => $phone_number,
                 'password' => Hash::make($password),
-                'user_type' => 1,
+                'user_type' => User::EMPLOYEE,
                 'start_date' => $start_date,
             ]);
 

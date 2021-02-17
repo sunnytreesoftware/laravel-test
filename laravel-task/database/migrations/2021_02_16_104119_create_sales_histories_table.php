@@ -19,7 +19,7 @@ class CreateSalesHistoriesTable extends Migration
             $table->bigInteger('customer_id')->unsigned();
             $table->bigInteger('sales_man_id')->unsigned();
             $table->integer('quantity');
-            $table->decimal('total_price');
+            $table->decimal('price');
             $table->boolean('order_status')->comment('0-Order, 1-Order completed (Paid)');
             $table->timestamps();
 
