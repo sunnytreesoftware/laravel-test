@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProductsController;
 use Illuminate\Support\Facades\Route;
@@ -16,8 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return (new App\Notifications\WelcomeNotification("assas", "email", "sasas"))
-                ->toMail('aaa');
+
     return view('welcome');
 });
 
@@ -30,3 +30,8 @@ Route::post('employee', [EmployeeController::class, 'addEmployee'])->name('add.e
 
 Route::get('product', [ProductsController::class, 'product'])->name('product');
 Route::post('product', [ProductsController::class, 'addProduct'])->name('add.product');
+Route::post('edit-product', [ProductsController::class, 'editProduct'])->name('edit.product');
+Route::post('topup-stock', [ProductsController::class, 'topUpProductStock'])->name('topup.product');
+
+Route::get('customer', [CustomerController::class, 'customer'])->name('customer');
+Route::post('customer', [CustomerController::class, 'addCustomer'])->name('add.customer');

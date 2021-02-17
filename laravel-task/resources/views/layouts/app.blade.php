@@ -9,9 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -135,7 +132,7 @@
                     <div class="list-group list-group-flush">
                       <a href="{{ Route('home') }}" class="list-group-item list-group-item-action bg-light">Dashboard</a>
                       <a href="{{ Route('employee') }}" class="list-group-item list-group-item-action bg-light">Employees</a>
-                      <a href="#" class="list-group-item list-group-item-action bg-light">Customers</a>
+                      <a href="{{ Route('customer') }}" class="list-group-item list-group-item-action bg-light">Customers</a>
                       <a href="{{ Route('product') }}" class="list-group-item list-group-item-action bg-light">Products</a>
                       <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
                       <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
@@ -155,5 +152,10 @@
 
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" ></script>
+    @yield('script')
+
 </body>
 </html>

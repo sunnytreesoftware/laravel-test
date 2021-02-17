@@ -6,35 +6,27 @@ use App\Notifications\WelcomeNotification;
 use App\User;
 use Illuminate\Http\Request;
 use Notification;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Spatie\Permission\Models\Role;
 use Illuminate\Support\Str;
 
-class EmployeeController extends Controller
+class CustomerController extends Controller
 {
     public function  __construct(){
         $this->middleware('auth');
     }
 
-    public function employee(){
+    public function customer(){
 
-        $roles = Role::all();
-        $employee = User::with('roles')->where('user_type', 1)->where('id','!=',Auth::user()->id)->paginate(10);
-
-        // return $employee;
-        return view('employee', ['roles' => $roles, 'employee' => $employee]);
+        $customers = User::where('user_type', 2)->paginate(10);
+        return view('customer', ['customers' => $customers]);
     }
 
-    public function addEmployee(Request $request){
+    public function addCustomer(Request $request){
         $first_name = $request->first_name;
         $last_name = $request->last_name;
         $email = $request->email;
         $phone_number = $request->phone_number;
-        $role = $request->role;
-        $start_date = $request->start_date;
         $password = $this->passwordGenerator();
 
         $this->validate($request, [
@@ -42,8 +34,7 @@ class EmployeeController extends Controller
             'last_name' => 'required',
             'email' => 'required|email|unique:users',
             'phone_number' => 'required|unique:users',
-            'start_date' => 'required|date',
-            'role' => 'required',
+
         ]);
 
         DB::beginTransaction();
@@ -55,14 +46,13 @@ class EmployeeController extends Controller
                 'email' => $email,
                 'phone_number' => $phone_number,
                 'password' => Hash::make($password),
-                'user_type' => 1,
-                'start_date' => $start_date,
+                'user_type' => 2,
             ]);
 
-            $employee->assignRole($role);
+            $employee->assignRole(['customer']);
             Notification::send($employee,new WelcomeNotification($password,$email,"Hello $first_name $last_name"));
             DB::commit();
-            return redirect()->back()->with('success', 'Employee has been successfully created');
+            return redirect()->back()->with('success', 'Customer has been successfully created');
         } catch (\Throwable $th) {
             DB::rollBack();
             return redirect()->back()->with('error', 'Something is wrong please try again');
