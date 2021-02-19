@@ -50,7 +50,7 @@ class SalesController extends Controller
             'sales_man_id' => Auth::user()->id,
             'quantity' => $quantity,
             'price' => $product->price,
-            'order_status' => SalesHistory::ORDER
+            'order_status' => SalesHistory::UNPAID
         ]);
 
         Product::where('id', $product_id)

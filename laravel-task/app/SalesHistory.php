@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class SalesHistory extends Model
 {
-    const ORDER = 0;
+    const UNPAID = 0;
     const PAID = 1;
 
     protected $appends = ['total_price'];

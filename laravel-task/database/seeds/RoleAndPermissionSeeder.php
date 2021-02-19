@@ -23,7 +23,7 @@ class RoleAndPermissionSeeder extends Seeder
             "customer"
         ];
 
-        $permisions = [
+        $permissions = [
             "create",
             "edit",
             "view"
@@ -33,8 +33,20 @@ class RoleAndPermissionSeeder extends Seeder
             Role::create(["name" => $role]);
         }
 
-        foreach ($permisions as $key => $permision) {
-            Permission::create(["name" => $permision]);
+        foreach ($permissions as $key => $permission) {
+            Permission::create(["name" => $permission]);
         }
+
+        $manager_role = Role::where('name', 'manager')->first();
+        $manager_role->givePermissionTo($permissions);
+
+        $employee_roles = Role::where('name', '!=', 'customer')->get();
+        foreach ($employee_roles as $key => $role) {
+            $role->givePermissionTo(['edit']);
+        }
+
+        $customer_role = Role::where('name', 'customer')->first();
+        $customer_role->givePermissionTo('view');
+        
     }
 }
