@@ -1,5 +1,4 @@
 # laravel-test
-Validate your abilities in Laravel. Fork this directory, build app and submit pull request.
 
 ### App Requirements  
 A company needs a better way to track product inventory, employees and customers. They are currently using an excel spreadsheet.  
